@@ -1,2 +1,3 @@
 # e-commerce_rehan
-Latihan LSP
+
+Latihan LSP ribet ajg lah
