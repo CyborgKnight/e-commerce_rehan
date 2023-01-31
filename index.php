@@ -10,6 +10,13 @@
 </head>
 
 <body>
+    <?php
+    if (isset($_GET['pesan'])) {
+        if ($_GET['pesan'] == "gagal") {
+            echo "<div class='alert'>Username dan Password tidak sesuai !</div>";
+        }
+    }
+    ?>
     <br><br><br>
     <div class="container">
         <div class="card">
@@ -17,7 +24,7 @@
                 <h3 style="text-align: center;"> Login </h3>
             </div>
             <div class="card-body">
-                <form>
+                <form action="ceklogin.php" method="post">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-text">
