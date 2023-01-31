@@ -10,7 +10,9 @@
 </head>
 
 <body>
-    ajggg
+    admin doang
+    <br>
+    semua sabi
 </body>
 
 <script src="asset/js/bootstrap.bundle.js">

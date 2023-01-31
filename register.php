@@ -1,3 +1,31 @@
+<?php
+
+require_once "core/init.php";
+
+// validasi register
+if (isset($_POST['submit'])) {
+    $name       = $_POST['name'];
+    $username   = $_POST['username'];
+    $email      = $_POST['email'];
+    $password   = $_POST['password'];
+
+    if (!empty(trim($name)) && !empty(trim($username)) && !empty(trim($email)) && !empty(trim($password))) {
+
+        if (register_cek_name($name)) {
+            // memasukkan ke db
+            if (register_user($name, $username, $email, $password)) {
+                echo 'berhasil';
+            } else {
+                echo 'gagal';
+            }
+        }
+    } else {
+        echo 'tidak boleh kosong';
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +45,7 @@
                 <h3 style="text-align: center;"> Register </h3>
             </div>
             <div class="card-body">
-                <form>
+                <form action="register.php" method="post">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-text">
@@ -25,7 +53,7 @@
                                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
                                 </svg>
                             </div>
-                            <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" autocomplete="off" required>
+                            <input type="text" name="name" class="form-control" placeholder="Nama Lengkap" autocomplete="off" id="name" onkeyup="myFunction()" required>
                         </div>
                         <br>
                         <div class="input-group">
@@ -57,21 +85,24 @@
                         </div>
                         <br>
                         <div class="input-group">
-                            <a href="" class="btn btn-primary"> Register </a>
+                            <input type="submit" class="btn btn-primary" name="submit" value="Register">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-body">
                 <label class="">Sudah punya akun?</label>
-                <a href="index.php" type="submit" class="btn btn-danger"> Login </a>
+                <a href="login.php" type="submit" class="btn btn-danger"> Login </a>
             </div>
         </div>
     </div>
 </body>
 
-<script src="asset/js/bootstrap.bundle.js">
-
+<script>
+    function myFunction() {
+        var x = document.getElementById("name");
+        x.value = x.value.toUpperCase();
+    }
 </script>
 
 </html>
