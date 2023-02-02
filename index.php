@@ -14,7 +14,7 @@ include "view/navbar.php";
     <p>selamat datang ... </p>
 
     <!-- untuk tambah barang -->
-    <input type="button" class="btn btn-primary" value="+ Tambah Produk" data-bs-target="#">
+    <input type="button" class="btn btn-primary" value="+ Tambah Barang" data-bs-target="#">
 
     <!-- table barang -->
     <div class="row">
