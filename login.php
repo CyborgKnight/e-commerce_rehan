@@ -1,6 +1,35 @@
 <?php
 // koneksi ke database
 include "functions/function.php";
+session_start();
+
+if (isset($_SESSION["login"])) {
+    header("Location: index.php");
+}
+$error      = "";
+
+if (isset($_POST["login"])) {
+    $username   = $_POST["username"];
+    $password   = $_POST["password"];
+
+    if (!empty(trim($username)) && !empty(trim($password))) {
+        $result = mysqli_query($conn, "SELECT * FROM tb_users WHERE username = '$username'");
+
+        if (mysqli_num_rows($result) === 1) {
+            $row = mysqli_fetch_assoc($result);
+
+            if (password_verify($password, $row["password"])) {
+                $_SESSION["login"]  = true;
+                $_SESSION["name"]   = $username;
+                header("Location: index.php");
+            }
+        } else {
+            $error = "Username atau password salah";
+        }
+    } else {
+        $error = "Nama dan password wajib di isi";
+    }
+}
 
 // koneksi ke header
 include "view/layout/header.php";
@@ -13,7 +42,7 @@ include "view/layout/header.php";
             <div style="width: 20rem;">
                 <h3 style="text-align: start;">Login</h3>
                 <!-- form login -->
-                <form action="" method="">
+                <form method="post">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-text">
@@ -32,14 +61,17 @@ include "view/layout/header.php";
                             </div>
                             <input type="password" name="password" class="form-control" placeholder="Password" required>
                         </div>
+                        <br>
                     </div>
                     <br>
-                    <input class="btn btn-primary" type="submit" value="Login">
+                    <a href="index.php">
+                        <button type="submit" name="login" class="btn btn-primary">Login</button>
+                    </a>
                 </form>
             </div>
             <div class="card-body">
                 <label class="">Belum punya akun?</label>
-                <a href="register.php" class="btn btn-danger"> Register </a>
+                <a href="register.php" class="btn btn-danger">Register</a>
             </div>
         </div>
     </div>

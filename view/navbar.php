@@ -32,7 +32,7 @@
       </button>
       <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><a class="dropdown-item" href="#">Keluar</a></li>
+        <li><a class="dropdown-item" href="../logout.php">Keluar</a></li>
       </ul>
     </div>
   </div>
