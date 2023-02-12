@@ -1,5 +1,6 @@
 <?php
-require 'config/function.php';
+// koneksi ke db
+include("config/function.php");
 
 if (isset($_SESSION["login"])) {
     header("Location: dashboard.php");
@@ -56,7 +57,7 @@ include("view/header.php");
                         </div>
                         <br>
                     </div>
-                    <button type="submit" name="login" class="btn btn-primary">Login</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Login</button>
                 </form>
             </div>
             <div class="card-body">
@@ -66,6 +67,8 @@ include("view/header.php");
         </div>
     </div>
 </div>
+
+<br><br><br><br><br>
 
 <?php
 // koneksi ke footer

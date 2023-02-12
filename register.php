@@ -4,8 +4,8 @@ require 'config/function.php';
 if (isset($_POST['register'])) {
     if (register($_POST) > 0) {
         echo "<script>
-                alert('Registrasi akun berhasil, silahkan login!');
-                document.location.href = 'login.php';
+                alert('Registrasi akun berhasil, silahkan Login!');
+                document.location.href = 'index.php';
             </script>";
     } else {
         echo mysqli_error($conn);
@@ -51,11 +51,13 @@ include("view/header.php");
             </div>
             <div class="card-body">
                 <label class="">Sudah punya akun?</label>
-                <a href="login.php" class="btn btn-danger"> Login </a>
+                <a href="index.php" class="btn btn-danger"> Login </a>
             </div>
         </div>
     </div>
 </div>
+
+<br><br><br><br><br>
 
 <?php
 // koneksi ke footer
