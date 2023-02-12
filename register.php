@@ -1,25 +1,21 @@
 <?php
-require './functions/function.php';
-session_start();
+require 'config/function.php';
 
 if (isset($_POST['register'])) {
     if (register($_POST) > 0) {
-        echo "
-            <script>
+        echo "<script>
                 alert('Registrasi akun berhasil, silahkan login!');
                 document.location.href = 'login.php';
-            </script>
-            ";
+            </script>";
     } else {
         echo mysqli_error($conn);
     }
 }
 
 // koneksi ke header
-include "view/header.php";
+include("view/header.php");
 ?>
 
-<!-- html -->
 <br>
 <div class="container d-flex justify-content-end">
     <div class="row">
@@ -61,11 +57,7 @@ include "view/header.php";
     </div>
 </div>
 
-<!-- koneksi ke footer -->
-<div class="container-fluid mt-5">
-    <footer class="py-3 my-4">
-        <?php
-        include "view/footer.php";
-        ?>
-    </footer>
-</div>
+<?php
+// koneksi ke footer
+include("view/footer.php");
+?>

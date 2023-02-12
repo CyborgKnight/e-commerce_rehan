@@ -1,22 +1,32 @@
 <?php
-// koneksi ke database
-include "functions/function.php";
-session_start();
+require 'config/function.php';
 
-// sistemnya
-if (isset($_POST['login'])) {
-    if (login($_POST) > 0) {
-        return true;
-    } else {
-        $error = true;
+if (isset($_SESSION["login"])) {
+    header("Location: dashboard.php");
+}
+
+if (isset($_POST["submit"])) {
+    $username   = $_POST["username"];
+    $password   = $_POST["password"];
+    $result     = mysqli_query($conn, "SELECT * FROM tb_users WHERE username = '$username'");
+
+    // cek username
+    if (mysqli_num_rows($result) === 1) {
+        // cek password
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($password, $row["password"])) {
+            $_SESSION["login"]      = true;
+            $_SESSION["name"]       = $username;
+            $_SESSION["idUser"]     = $row["idUser"];
+            header("Location: dashboard.php");
+        }
     }
 }
 
 // koneksi ke header
-include "view/header.php";
+include("view/header.php");
 ?>
 
-<!-- html -->
 <br>
 <div class="container">
     <div class="row justify-content-center">
@@ -46,7 +56,6 @@ include "view/header.php";
                         </div>
                         <br>
                     </div>
-                    <br>
                     <button type="submit" name="login" class="btn btn-primary">Login</button>
                 </form>
             </div>
@@ -58,11 +67,7 @@ include "view/header.php";
     </div>
 </div>
 
-<!-- koneksi ke footer -->
-<div class="container-fluid mt-5">
-    <footer class="py-3 my-4">
-        <?php
-        include "view/footer.php";
-        ?>
-    </footer>
-</div>
+<?php
+// koneksi ke footer
+include("view/footer.php");
+?>
