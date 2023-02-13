@@ -79,7 +79,7 @@ include("view/navbar.php");
                         <div class="modal-body">
                             <form action="" method="post">
                                 Apakah Yakin ingin menghapus <?= $namaBarang ?>?
-                                <input type="hidden" name="idbarang" value="<?= $idBarang ?>">
+                                <input type="hidden" name="id_barang" value="<?= $idBarang ?>">
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-danger" name="btnhapusbarang"> Hapus </button>
@@ -99,13 +99,13 @@ include("view/navbar.php");
                         </div>
                         <div class="modal-body">
                             <form action="" method="post" enctype="multipart/form-data">
-                                <input type="text" value="<?= $namaBarang ?>" name="namaBarang" class="form-control" required><br>
+                                <input type="text" value="<?= $namaBarang ?>" name="barang" class="form-control" required><br>
                                 <input type="text" value="<?= $harga ?>" name="harga" class="form-control" required><br>
                                 <input type="number" value="<?= $stok ?>" name="stok" class="form-control" required><br>
                                 <img src="./assets/img/ $gambar ?>" class="card-img-top"><br><br>
                                 <input type="file" value="<?= $gambar ?>" name="gambar" class="form-control"><br>
                                 <input type="hidden" name="gambar_lama" value="<?= $gambar; ?>">
-                                <input type="hidden" name="idbarang" value="<?= $idBarang ?>">
+                                <input type="hidden" name="id_barang" value="<?= $idBarang ?>">
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-warning" name="btneditbarang">Edit</button>
@@ -126,7 +126,7 @@ include("view/navbar.php");
                         <div class="modal-body">
                             <div class="form-grup">
                                 <form action="" method="post" enctype="multipart/form-data">
-                                    <input type="text" placeholder="Nama Produk" name="namaBarang" class="form-control" autocomplete="off" required><br>
+                                    <input type="text" placeholder="Nama Produk" name="barang" class="form-control" autocomplete="off" required><br>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
                                         <input type="number" placeholder="Harga" name="harga" class="form-control" autocomplete="off" required>

@@ -39,9 +39,9 @@ function cek_status($username)
     if ($result = mysqli_query($conn, $query)) {
         while ($row = mysqli_fetch_assoc($result)) {
             $statusUser = $row["statusUser"];
-        }
+             return $statusUser;
+        } 
     }
-    return $statusUser;
 }
 
 // untuk cek apakah yg login admin atau user biasa
@@ -54,13 +54,13 @@ if (isset($_SESSION["name"])) {
 
 // sistem tambah produk
 if (isset($_POST["btntambahbarang"])) {
-    $namaBarang    = $_POST["namaBarang"];
+    $title_barang   = $_POST["barang"];
     $deskripsi      = $_POST["deskripsi"];
     $harga          = $_POST["harga"];
     $stok           = $_POST["stok"];
     $gambar         = upload();
 
-    $result         = mysqli_query($conn, "INSERT INTO tb_barang (namaBarang, deskripsi, harga, stok, gambar) VALUES ('$namaBarang,', '$deskripsi', '$harga', '$gambar')");
+    $result         = mysqli_query($conn, "INSERT INTO tb_barang (namaBarang, harga, stok, deskripsi, gambar) VALUES ('$title_barang', '$deskripsi', '$harga', '$stok','$gambar')");
 
     if ($result) {
         header("Location : dashboard.php?p=Berhasil ditambah!");
@@ -115,8 +115,9 @@ function upload()
 
 // hapus barang
 if (isset($_POST["btnhapusbarang"])) {
-    $idBarang         = $_POST["idBarang"];
-    $result     = mysqli_query($conn, "DELETE FROM tb_barang WHERE id = $idBarang");
+    $idBarang         = $_POST["id_barang"];
+
+    $result           = mysqli_query($conn, "DELETE FROM tb_barang WHERE idBarang = $idBarang");
 
     if ($result) {
         header("Location: dashboard.php?p=Berhasil dihapus");
@@ -125,7 +126,7 @@ if (isset($_POST["btnhapusbarang"])) {
 
 // edit barang
 if (isset($_POST["btnedibarang"])) {
-    $idBarang       = $_POST["idBarang"];
+    $idBarang       = $_POST["id_barang"];
     $title_barang   = $_POST["barang"];
     $harga          = $_POST["harga"];
     $stok           = $_POST["stok"];
