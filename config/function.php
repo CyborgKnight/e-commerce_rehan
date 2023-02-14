@@ -39,8 +39,8 @@ function cek_status($username)
     if ($result = mysqli_query($conn, $query)) {
         while ($row = mysqli_fetch_assoc($result)) {
             $statusUser = $row["statusUser"];
-             return $statusUser;
-        } 
+            return $statusUser;
+        }
     }
 }
 
@@ -49,21 +49,6 @@ $super_user = false;
 if (isset($_SESSION["name"])) {
     if (cek_status($_SESSION["name"]) == 1) {
         $super_user = true;
-    }
-}
-
-// sistem tambah produk
-if (isset($_POST["btntambahbarang"])) {
-    $title_barang   = $_POST["barang"];
-    $deskripsi      = $_POST["deskripsi"];
-    $harga          = $_POST["harga"];
-    $stok           = $_POST["stok"];
-    $gambar         = upload();
-
-    $result         = mysqli_query($conn, "INSERT INTO tb_barang (namaBarang, harga, stok, deskripsi, gambar) VALUES ('$title_barang', '$deskripsi', '$harga', '$stok','$gambar')");
-
-    if ($result) {
-        header("Location : dashboard.php?p=Berhasil ditambah!");
     }
 }
 
@@ -104,13 +89,29 @@ function upload()
         </script>";
     }
 
-    $nama_file_baru  = uniqid();
+    $nama_file_baru = uniqid();
     $nama_file_baru .= ".";
     $nama_file_baru .= $ekstensi_file;
 
     move_uploaded_file($tmp_file, "assets/img/" . $nama_file_baru);
 
     return $nama_file_baru;
+}
+
+// sistem tambah produk
+if (isset($_POST["btntambahbarang"])) {
+    $title_barang           = $_POST["barang"];
+    $hargaBarang            = $_POST["harga"];
+    $deskripsiBarang        = $_POST["deskripsi"];
+    $stokBarang             = $_POST["stok"];
+    $gambar                 = upload();
+
+    $result                 = mysqli_query($conn, "INSERT INTO tb_barang (namaBarang, harga, stok, deskripsi, gambar) VALUES ('$title_barang', '$hargaBarang', '$stokBarang','$deskripsiBarang', '$gambar') ");
+
+
+    if ($result) {
+        header("Location: dashboard.php?p=Berhasil ditambah!");
+    }
 }
 
 // hapus barang
@@ -125,12 +126,13 @@ if (isset($_POST["btnhapusbarang"])) {
 }
 
 // edit barang
-if (isset($_POST["btnedibarang"])) {
-    $idBarang       = $_POST["id_barang"];
-    $title_barang   = $_POST["barang"];
-    $harga          = $_POST["harga"];
-    $stok           = $_POST["stok"];
-    $gambar_lama    = $_POST["gambar_lama"];
+if (isset($_POST["btneditbarang"])) {
+    $idBarang               = $_POST["id_barang"];
+    $title_barang           = $_POST["barang"];
+    $harga_barang           = $_POST["harga"];
+    $deskripsiBarang        = $_POST["deskripsi"];
+    $stok                   = $_POST["stok"];
+    $gambar_lama            = $_POST["gambar_lama"];
 
     if ($_FILES["gambar"]["error"] == 4) {
         $gambar = $gambar_lama;
@@ -138,9 +140,15 @@ if (isset($_POST["btnedibarang"])) {
         $gambar = upload();
     }
 
-    $result = mysqli_query($conn, "UPDATE tb_barang SET namaBarang = '$title_barang', harga = '$harga', stok = '$stok', gambar = '$gambar'  WHERE id_barang = $idBarang");
+    $result = mysqli_query($conn, "UPDATE tb_barang SET namaBarang = '$title_barang', harga = '$harga_barang', deskripsi = '$deskripsiBarang', stok = '$stok', gambar = '$gambar'  WHERE idBarang = $idBarang");
 
     if ($result) {
         header("Location: dashboard.php?p=Berhasil mengedit");
     }
+}
+
+// sistem beli barang
+if (isset($_GET["beli"])) {
+    $id     = $_GET["beli"];
+    $query  = mysqli_query($conn, "SELECT * FROM tb_barang WHERE idBarang = $id");
 }

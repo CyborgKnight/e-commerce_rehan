@@ -19,7 +19,7 @@ include("view/header.php");
 <br>
 <div class="container d-flex justify-content-end">
     <div class="row">
-        <div class="col-md-18">
+        <div class="col-md-18" >
             <div style="width: 20rem;">
                 <h3 style="text-align: start;">Register</h3>
                 <hr class="mb-3">

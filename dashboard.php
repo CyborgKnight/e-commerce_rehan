@@ -15,7 +15,7 @@ include("view/navbar.php");
 
 <br>
 
-<div class="container-fluid">
+<div class="container">
     <!-- tombol tambah barang -->
     <?php if ($super_user == true) : ?>
         <!-- Button trigger modal -->
@@ -39,18 +39,19 @@ include("view/navbar.php");
         <?php
         $result = mysqli_query($conn, "SELECT * FROM tb_barang");
         while ($row = mysqli_fetch_assoc($result)) :
-            $idBarang       = $row["idBarang"];
-            $namaBarang     = $row["namaBarang"];
-            $harga          = $row["harga"];
-            $stok           = $row["stok"];
-            $gambar         = $row["gambar"];
+            $idBarang           = $row["idBarang"];
+            $namaBarang         = $row["namaBarang"];
+            $hargaBarang        = $row["harga"];
+            $deskripsiBarang    = $row["deskripsi"];
+            $stok               = $row["stok"];
+            $gambar             = $row["gambar"];
         ?>
             <div class="col g-3">
-                <div class="card h-100 border-0 kartu" style="width: 15rem;">
+                <div class="card h-100 border-0 kartu" style="width: 15rem; background-color: #E2E3E5;">
                     <img src="assets/img/<?= $gambar ?>" class="card-img-top" width="100%" height="150px">
                     <div class="card-body">
-                        <h5 class="card-"> <a href="detail.php?detail=<?= $idBarang ?>" class="namaBarang"> <?= $namaBarang ?> </a> </h5>
-                        <p class="card-text"> <?= "Rp " . number_format($harga, 0, ',', '.'); ?> </p>
+                        <h5 class="card-text"> <a href="detail.php?detail=<?= $idBarang ?>" class="text-decoration-none"> <?= $namaBarang ?> </a> </h5>
+                        <p class="card-text"> <?= "Rp " . number_format($hargaBarang, 0, ',', '.'); ?> </p>
 
                         <?php if ($super_user == true) : ?>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapusbarang<?= $idBarang ?>">
@@ -99,10 +100,11 @@ include("view/navbar.php");
                         </div>
                         <div class="modal-body">
                             <form action="" method="post" enctype="multipart/form-data">
-                                <input type="text" value="<?= $namaBarang ?>" name="barang" class="form-control" required><br>
-                                <input type="text" value="<?= $harga ?>" name="harga" class="form-control" required><br>
-                                <input type="number" value="<?= $stok ?>" name="stok" class="form-control" required><br>
-                                <img src="./assets/img/ $gambar ?>" class="card-img-top"><br><br>
+                                <input type="text" placeholder="Nama Barang" value="<?= $namaBarang ?>" name="barang" class="form-control" required><br>
+                                <input type="number" placeholder="Harga" value="<?= $hargaBarang ?>" name="harga" class="form-control" required><br>
+                                <input type="number" placeholder="Stok" value="<?= $stok ?>" name="stok" class="form-control" required><br>
+                                <input type="text" value="<?= $deskripsiBarang ?>" placeholder="Deskripsi" name="deskripsi" class="form-control" required><br>
+                                <img src="assets/img/<?= $gambar ?>" class="card-img-top"><br><br>
                                 <input type="file" value="<?= $gambar ?>" name="gambar" class="form-control"><br>
                                 <input type="hidden" name="gambar_lama" value="<?= $gambar; ?>">
                                 <input type="hidden" name="id_barang" value="<?= $idBarang ?>">
@@ -114,36 +116,33 @@ include("view/navbar.php");
                     </div>
                 </div>
             </div>
+        <?php endwhile; ?>
+    </div>
 
-            <!-- Modal tambah-->
-            <div class="modal fade" id="tambahbarang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Barang</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-grup">
-                                <form action="" method="post" enctype="multipart/form-data">
-                                    <input type="text" placeholder="Nama Produk" name="barang" class="form-control" autocomplete="off" required><br>
-                                    <div class="input-group">
-                                        <span class="input-group-text">Rp</span>
-                                        <input type="number" placeholder="Harga" name="harga" class="form-control" autocomplete="off" required>
-                                    </div><br>
-                                    <input type="number" placeholder="Stok" name="stok" class="form-control" autocomplete="off" required><br>
-                                    <input type="text" placeholder="Deskripsi Barang" name="deskripsi" class="form-control" autocomplete="off" required><br>
-                                    <input type="file" name="gambar" class="form-control" required><br>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" name="btntambahbarang">Tambah</button>
-                            </div>
-                            </form>
-                        </div>
+    <!-- Modal tambah-->
+    <div class="modal fade" id="tambahbarang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Barang</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-grup">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <input type="text" placeholder="Nama Produk" name="barang" class="form-control" autocomplete="off" required><br>
+                            <input type="number" placeholder="Harga" name="harga" class="form-control" autocomplete="off" required><br>
+                            <input type="number" placeholder="Stok" name="stok" class="form-control" autocomplete="off" required><br>
+                            <input type="text" placeholder="Deskripsi Barang" name="deskripsi" class="form-control" autocomplete="off" required><br>
+                            <input type="file" name="gambar" class="form-control" required><br>
                     </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="btntambahbarang">Tambah</button>
+                    </div>
+                    </form>
                 </div>
             </div>
-        <?php endwhile; ?>
+        </div>
     </div>
 </div>
 
