@@ -7,10 +7,6 @@ if (!isset($_SESSION["login"])) {
     header("Location: index.php");
 }
 
-// $id_user    = $_SESSION["idUser"];
-// $query      = mysqli_query($conn, "SELECT * FROM tb_user WHERE idUser = $iduser");
-// $datauser   = mysqli_fetch_assoc($query);
-
 // koneksi ke header
 include("view/header.php");
 
@@ -25,7 +21,7 @@ include("view/navbar.php");
                 <div class="card-body">
                     <div class="row">
                         <?php
-                        $id     = $_GET["beli"];
+                        $id     = $_GET["detail"];
                         $result = mysqli_query($conn, "SELECT * FROM tb_barang WHERE idBarang = $id");
                         while ($row = mysqli_fetch_assoc($result)) :
                             $barang     = $row["namaBarang"];
@@ -66,30 +62,23 @@ include("view/navbar.php");
                 <div class="modal-body">
                     <div class="form-grup">
                         <form action="" method="post" enctype="multipart/form-data">
-                            <input type="text" placeholder="Nama Lengkap" name="nama" value="<?= $datauser; ?>" class="form-control" autocomplete="off" required><br>
-                            <input type="text" placeholder="Alamat Lengkap" name="#" value="#" class="form-control" autocomplete="off" required><br>
-                            <input type="number" placeholder="Jumlah Pembelian" name="#" value="#" class="form-control" autocomplete="off" required><br>
+                            <input type="text" placeholder="Nama Lengkap" name="nama" class="form-control" autocomplete="off" required><br>
+                            <input type="text" placeholder="Alamat Lengkap" name="alamat" class="form-control" autocomplete="off" required><br>
+                            <input type="number" placeholder="Jumlah Pembelian" name="qty" class="form-control" autocomplete="off" required><br>
                             <div class="input-group mb-3">
                                 <label class="input-group-text" for="inputGroupSelect01"> Jasa Pengiriman </label>
                                 <select class="form-select" id="inputGroupSelect01">
-                                    <option name="pengiriman" value="SICEPAT" id="sicepat"> Si Cepat </option>
-                                    <option name="pengiriman" value="JNE" id="jne"> JNE </option>
-                                    <option name="pengiriman" value="J&T" id="j&t"> J&T </option>
+                                    <option name="kurir" value="SICEPAT" id="sicepat"> Si Cepat </option>
+                                    <option name="kurir" value="JNE" id="jne"> JNE </option>
+                                    <option name="kurir" value="J&T" id="j&t"> J&T </option>
                                 </select>
                             </div>
-                            <?php
-                            $result = mysqli_query($conn, "SELECT * FROM tb_produk WHERE id = $id");
-                            $name           = $_SESSION["name"];
-                            $ambil_idUser   = mysqli_query($conn, "SELECT idUser FROM tb_user WHERE username = '$name'");
-                            $data           = mysqli_fetch_assoc($ambiliduser);
-                            ?>
-                            <br>
+                            <div class="modal-footer">
+                                <input type="hidden" name="idUser" value="<?= $data["idUser"]; ?>">
+                                <button type="submit" class="btn btn-primary" name="checkout"> CheckOut </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="idUser" value="<?= $data["idUser"]; ?>">
-                        <button type="submit" class="btn btn-primary" name="checkout"> CheckOut </button>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>

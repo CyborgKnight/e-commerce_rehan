@@ -8,26 +8,25 @@ if (isset($_SESSION["name"])) {
 }
 ?>
 
-<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php"> HAN Printer </a>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="dashboard.php">Home</a>
         </li>
-
         <?php if ($super_user == true) : ?>
           <li class="nav-item">
-            <a class="nav-link" href="#"> Konfirmasi Transaksi </a>
+            <a class="nav-link" href="konfirmasitransaksi.php"> Konfirmasi Transaksi </a>
+          </li>
+        <?php endif; ?>
+        <?php if ($super_user == false || $super_user == true) : ?>
+          <li class="nav-item">
+            <a class="nav-link" href="statustransaksi.php"> Status Transaksi </a>
           </li>
         <?php endif; ?>
 
-        <?php if ($super_user == true || $super_user == false) : ?>
-          <li class="nav-item">
-            <a class="nav-link" href="#"> Status Transaksi </a>
-          </li>
-        <?php endif; ?>
       </ul>
     </div>
 

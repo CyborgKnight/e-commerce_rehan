@@ -152,3 +152,43 @@ if (isset($_GET["beli"])) {
     $id     = $_GET["beli"];
     $query  = mysqli_query($conn, "SELECT * FROM tb_barang WHERE idBarang = $id");
 }
+
+if (isset($_GET["checkout"])) {
+    $nama   = $_POST["nama"];
+    $alamat = $_POST["alamat"];
+    $kurir  = $_POST["kurir"];
+    $qty    = $_POST["qty"];
+    $idUser = $_POST["idUser"];
+
+    $idbarang = $_GET["detail"];
+
+    $query  = mysqli_query($conn, "SELECT * FROM tb_transaksi");
+
+    // untuk cek stok barang
+    $cekstoksekarang    = mysqli_query($conn, "SELECT * FROM tb_barang WHERE idBarang = $id");
+    $ambildata          = mysqli_fetch_assoc($cekstoksekarang);
+
+    $stoksekarang       = $ambildata["stok"];
+
+    if ($stoksekarang >= $qty) {
+        $kurangkanstoksekarangdenganqty = $stoksekarang - $qty;
+
+        $updatestokmasuk = mysqli_query($conn, "UPDATE tb_barang SET stok = $kurangkanstoksekarangdenganqty WHERE idBarang = $id");
+    } else {
+        echo "
+        <script>
+        alert('Maaf stok tidak mencukupi');
+            window.location.href = 'detail.php?beli={$id}';
+            </script>
+            ";
+        die;
+    }
+
+    $result = mysqli_query($conn, "INSERT INTO tb_transaksi (idUser, idBarang, nama, alamat, jasa_pengiriman, qty, status) VALUES ('$idUser', '$idbarang', '$nama', '$alamat', '$pengiriman', $qty, 0)");
+
+    var_dump($result);
+
+    if ($result) {
+        header("Location: statustransaksi.php?beli=" . "$id");
+    }
+}
