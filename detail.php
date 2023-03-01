@@ -38,11 +38,8 @@ include("view/navbar.php");
                             <div class="col-md-6">
                                 <h5> <?= $barang; ?> </h5>
                                 <h4> <?= "Rp" . number_format($harga, 2); ?> </h4>
-                                <p><strong> Stok <?= $stok; ?> </strong></p>
+                                <p><strong> Stok </strong> <?= $stok; ?> </p>
                                 <p> <?= $deskripsi ?> </p>
-                                <?php if ($super_user == false) : ?>
-                                    <a href="formBeli.php?beli<?= $id; ?>" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#beliBarang"> BELI </a>
-                                <?php endif; ?>
                             </div>
                         <?php endwhile; ?>
                     </div>
@@ -50,35 +47,40 @@ include("view/navbar.php");
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal Form Beli Barang -->
-    <div class="modal fade" id="beliBarang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel"> Isi form di bawah ini </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-grup">
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <input type="text" placeholder="Nama Lengkap" name="nama" class="form-control" autocomplete="off" required><br>
-                            <input type="text" placeholder="Alamat Lengkap" name="alamat" class="form-control" autocomplete="off" required><br>
-                            <input type="number" placeholder="Jumlah Pembelian" name="qty" class="form-control" autocomplete="off" required><br>
-                            <div class="input-group mb-3">
-                                <label class="input-group-text" for="inputGroupSelect01"> Jasa Pengiriman </label>
-                                <select class="form-select" id="inputGroupSelect01">
-                                    <option name="kurir" value="SICEPAT" id="sicepat"> Si Cepat </option>
-                                    <option name="kurir" value="JNE" id="jne"> JNE </option>
-                                    <option name="kurir" value="J&T" id="j&t"> J&T </option>
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="hidden" name="idUser" value="<?= $data["idUser"]; ?>">
-                                <button type="submit" class="btn btn-primary" name="checkout"> CheckOut </button>
-                            </div>
-                        </form>
-                    </div>
+<div class="container">
+    <div class="row-justify-content-center">
+        <div class="col">
+            <div class="card my-3">
+                <div class="card-header"> Form Pembelian </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        <div class="col-md-4">
+                            <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required>
+                        </div>
+                        <br>
+                        <div class="col-md-4">
+                            <input type="text" name="alamat" class="form-control" placeholder="Alamat Lengkap" required>
+                        </div>
+                        <br>
+                        <div class="col-md-4">
+                            <input type="number" name="qty" class="form-control" placeholder="jumlah Pembelian" required>
+                        </div>
+                        <br>
+                        <div class="col-md-4">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected> Pilih Jasa Pengiriman </option>
+                                <option value="jne"> JNE </option>
+                                <option value="j&t"> J&T </option>
+                                <option value="sicepat"> SiCepat </option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="col-md-4">
+                            <a href="#" class="btn btn-success"> CheckOut </a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

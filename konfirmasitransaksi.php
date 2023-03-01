@@ -18,7 +18,7 @@ include("view/navbar.php");
     <h3 class="text-center my-3"> DAFTAR TRANSAKSI </h3>
     <div class="table-responsive">
         <table class="table table-striped table-dark">
-            <thead style="color: #F7F7F7;">
+            <thead style="color: #508FC7;">
                 <tr>
                     <th width="20%"> Nama Pembeli </th>
                     <th> Jenis Barang </th>
@@ -28,7 +28,7 @@ include("view/navbar.php");
                     <th> Kurir </th>
                     <th width="18%"> Action </th>
                 </tr>
-            </thead>            
+            </thead>
             <tbody>
                 <tr>
                     <form action="" method="post">

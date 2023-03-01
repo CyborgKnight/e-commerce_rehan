@@ -7,10 +7,10 @@ if (!isset($_SESSION["login"])) {
     header("Location: index.php");
 }
 
-$idUser     = $_SESSION["idUser"];
-$username   = $_SESSION["name"];
+// $idUser     = $_SESSION["idUser"];
+// $username   = $_SESSION["name"];
 
-$result     = mysqli_query($conn, "SELECT * FROM 'tb_transaksi' INNER JOIN tb_barang ON tb_transaksi.idBarang = tb_barang.idBarang WHERE idUser = '$idUser' ORDER BY idTransaksi DESC");
+// $result     = mysqli_query($conn, "SELECT * FROM 'tb_transaksi' INNER JOIN tb_barang ON tb_transaksi.idBarang = tb_barang.idBarang WHERE idUser = '$idUser' ORDER BY idTransaksi DESC");
 
 // koneksi ke header
 include("view/header.php");
@@ -23,7 +23,7 @@ include("view/navbar.php");
     <h3 class="text-center my-3"> DAFTAR TRANSAKSI </h3>
     <div class="table-responsive">
         <table class="table table-striped table-dark">
-            <thead style="color: #F7F7F7;">
+            <thead style="color: #508FC7;">
                 <tr>
                     <th> Nama Pembeli </th>
                     <th> Jenis Barang </th>
