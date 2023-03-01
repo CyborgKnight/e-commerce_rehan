@@ -30,20 +30,26 @@ include("view/navbar.php");
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <form action="" method="post">
-                        <td> Rehan </td>
-                        <td> mobil </td>
-                        <td> 2 </td>
-                        <td> 10000 </td>
-                        <td> jl surga </td>
-                        <td> JNE </td>
-                        <td>
-                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#konfirmasi"> Konfirmasi </button>
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-targer="#cancel"> Cancel </button>
-                        </td>
-                    </form>
-                </tr>
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `tb_transaksi` INNER JOIN tb_barang ON tb_transaksi.idBarang = tb_barang.idBarang WHERE tb_transaksi.status = 0");
+                while ($row = mysqli_fetch_assoc($result)) :
+                ?>
+                    <tr>
+                        <form action="" method="post">
+                            <td><?= $row["nama"] ?></td>
+                            <td><?= $row["namaBarang"] ?></td>
+                            <td><?= $row["qty"] ?></td>
+                            <td><?= $row["harga"] ?></td>
+                            <td><?= $row["alamat"] ?></td>
+                            <td><?= $row["jasa_pengiriman"] ?></td>
+                            <td>
+                                <input type="hidden" name="idTransaksi" value="<?= $row["idTransaksi"] ?>">
+                                <button type="submit" class="btn btn-success" name="konfirmasi">Konfirmasi</button>
+                                <button type="submit" class="btn btn-danger" name="tolak">Tolak</button>
+                            </td>
+                        </form>
+                    </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>

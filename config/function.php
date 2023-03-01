@@ -153,20 +153,36 @@ if (isset($_GET["beli"])) {
     $query  = mysqli_query($conn, "SELECT * FROM tb_barang WHERE idBarang = $id");
 }
 
-if (isset($_GET["checkout"])) {
-    $nama   = $_POST["nama"];
-    $alamat = $_POST["alamat"];
-    $kurir  = $_POST["kurir"];
-    $qty    = $_POST["qty"];
-    $idUser = $_POST["idUser"];
+if (isset($_POST["checkout"])) {
+    $nama           = $_POST["nama"];
+    $alamat         = $_POST["alamat"];
+    $pengiriman     = $_POST["pengiriman"];
+    $qty            = $_POST["qty"];
+    $idUser         = $_POST["idUser"];
 
     $idbarang = $_GET["detail"];
 
     $result = mysqli_query($conn, "INSERT INTO tb_transaksi (idUser, idBarang, nama, alamat, jasa_pengiriman, qty, status) VALUES ('$idUser', '$idbarang', '$nama', '$alamat', '$pengiriman', $qty, 0)");
 
-    var_dump($result);
+    if ($result) {
+        header("Location: statustransaksi.php");
+    }
+}
+
+if (isset($_POST['konfirmasi'])) {
+    $idTransaksi = $_POST["idTransaksi"];
+    $result = mysqli_query($conn, "UPDATE tb_transaksi SET status = 1 WHERE idTransaksi = $idTransaksi");
 
     if ($result) {
-        header("Location: statustransaksi.php?beli=" . "$id");
+        header("Location: konfirmasitransaksi.php");
+    }
+}
+
+if (isset($_POST['tolak'])) {
+    $idTransaksi = $_POST["idTransaksi"];
+    $result = mysqli_query($conn, "UPDATE tb_transaksi SET status = 2 WHERE idTransaksi = $idTransaksi");
+
+    if ($result) {
+        header("Location: konfirmasitransaksi.php");
     }
 }

@@ -7,11 +7,6 @@ if (!isset($_SESSION["login"])) {
     header("Location: index.php");
 }
 
-// $idUser     = $_SESSION["idUser"];
-// $username   = $_SESSION["name"];
-
-// $result     = mysqli_query($conn, "SELECT * FROM 'tb_transaksi' INNER JOIN tb_barang ON tb_transaksi.idBarang = tb_barang.idBarang WHERE idUser = '$idUser' ORDER BY idTransaksi DESC");
-
 // koneksi ke header
 include("view/header.php");
 
@@ -32,12 +27,27 @@ include("view/navbar.php");
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td> Rehan </td>
-                    <td> mobil </td>
-                    <td> 1 </td>
-                    <td> Transaksi Belum di Konfirmasi </td>
-                </tr>
+                <?php
+                $result = mysqli_query($conn, "SELECT * FROM `tb_transaksi` INNER JOIN tb_barang ON tb_transaksi.idBarang = tb_barang.idBarang");
+
+                while ($row = mysqli_fetch_assoc($result)) :
+
+                    $status = "";
+                    if ($row["status"] == 2) {
+                        $status = "Transaksi di tolak";
+                    } else if ($row["status"] == 1) {
+                        $status = "Transaksi di konfirmasi";
+                    } else {
+                        $status = "Belum di konfirmasi";
+                    }
+                ?>
+                    <tr>
+                        <td><?= $row["nama"] ?></td>
+                        <td><?= $row["namaBarang"] ?></td>
+                        <td><?= $row["qty"] ?></td>
+                        <td><?= $status ?></td>
+                    </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>
