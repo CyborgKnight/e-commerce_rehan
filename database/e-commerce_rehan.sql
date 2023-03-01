@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2023 at 08:31 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.8
+-- Generation Time: Mar 01, 2023 at 07:06 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,17 +31,17 @@ CREATE TABLE `tb_barang` (
   `idBarang` int(11) NOT NULL,
   `namaBarang` varchar(20) NOT NULL,
   `harga` int(11) NOT NULL,
-  `stok` int(11) NOT NULL,
+  `stok` varchar(255) NOT NULL,
   `deskripsi` varchar(100) NOT NULL,
   `gambar` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_barang`
 --
 
 INSERT INTO `tb_barang` (`idBarang`, `namaBarang`, `harga`, `stok`, `deskripsi`, `gambar`) VALUES
-(1, 'mobil', 4000000, 5, 'secepat kilat', '63eb00ecea959.jfif');
+(1, 'a', 123123, 'Tak Tersedia', 'afadf', '63feda297a4c7.jpg');
 
 -- --------------------------------------------------------
 
@@ -58,7 +58,7 @@ CREATE TABLE `tb_transaksi` (
   `jasa_pengiriman` varchar(20) NOT NULL,
   `qty` int(11) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -71,15 +71,15 @@ CREATE TABLE `tb_users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `statusUser` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_users`
 --
 
 INSERT INTO `tb_users` (`idUser`, `username`, `password`, `statusUser`) VALUES
-(1, 'rehan', '$2y$10$l2P1sccFPcReYKAigl8fDOG.zjANW1YZd3jKDI6aS6TgIat9m5ulq', 1),
-(2, 'bana', '$2y$10$znxR4vS/U/3pip7pFrGE7.N7b4z01x.Nj8c0FU/yTlGF2sV.iVS92', 0);
+(1, 'admin', '$2y$10$l5VXPNGhI07YfzOYmSuYNe.EvayfB6flkknEEPLP4qO1/Vna6WRcy', 1),
+(2, 'user', '$2y$10$2RUMNsQSM9RQuVNuBVrvKeUCjgDBBp4gxFTo4y7LN1cj0HEH37k0G', 0);
 
 --
 -- Indexes for dumped tables
@@ -90,6 +90,12 @@ INSERT INTO `tb_users` (`idUser`, `username`, `password`, `statusUser`) VALUES
 --
 ALTER TABLE `tb_barang`
   ADD PRIMARY KEY (`idBarang`);
+
+--
+-- Indexes for table `tb_transaksi`
+--
+ALTER TABLE `tb_transaksi`
+  ADD PRIMARY KEY (`idTransaksi`);
 
 --
 -- Indexes for table `tb_users`
@@ -106,6 +112,12 @@ ALTER TABLE `tb_users`
 --
 ALTER TABLE `tb_barang`
   MODIFY `idBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tb_transaksi`
+--
+ALTER TABLE `tb_transaksi`
+  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_users`
