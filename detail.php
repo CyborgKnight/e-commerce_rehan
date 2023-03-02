@@ -70,15 +70,15 @@ include("view/navbar.php");
                             <div class="card-body">
                                 <form action="" method="post">
                                     <div class="col-md-4">
-                                        <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required>
+                                        <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" autocomplete="off" required>
                                     </div>
                                     <br>
                                     <div class="col-md-4">
-                                        <input type="text" name="alamat" class="form-control" placeholder="Alamat Lengkap" required>
+                                        <input type="text" name="alamat" class="form-control" placeholder="Alamat Lengkap" autocomplete="off" required>
                                     </div>
                                     <br>
                                     <div class="col-md-4">
-                                        <input type="number" name="qty" class="form-control" placeholder="jumlah Pembelian" required>
+                                        <input type="number" name="qty" class="form-control" placeholder="jumlah Pembelian"  required>
                                     </div>
                                     <br>
                                     <div class="col-md-4">

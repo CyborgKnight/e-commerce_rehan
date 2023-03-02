@@ -148,11 +148,6 @@ if (isset($_POST["btneditbarang"])) {
 }
 
 // sistem beli barang
-if (isset($_GET["beli"])) {
-    $id     = $_GET["beli"];
-    $query  = mysqli_query($conn, "SELECT * FROM tb_barang WHERE idBarang = $id");
-}
-
 if (isset($_POST["checkout"])) {
     $nama           = $_POST["nama"];
     $alamat         = $_POST["alamat"];
@@ -169,6 +164,7 @@ if (isset($_POST["checkout"])) {
     }
 }
 
+// untuk konfirmasi transaksi
 if (isset($_POST['konfirmasi'])) {
     $idTransaksi = $_POST["idTransaksi"];
     $result = mysqli_query($conn, "UPDATE tb_transaksi SET status = 1 WHERE idTransaksi = $idTransaksi");
@@ -178,6 +174,7 @@ if (isset($_POST['konfirmasi'])) {
     }
 }
 
+// untuk menolak transaksi
 if (isset($_POST['tolak'])) {
     $idTransaksi = $_POST["idTransaksi"];
     $result = mysqli_query($conn, "UPDATE tb_transaksi SET status = 2 WHERE idTransaksi = $idTransaksi");
