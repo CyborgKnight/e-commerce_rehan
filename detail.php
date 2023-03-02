@@ -11,8 +11,8 @@ $iduser     = $_SESSION["idUser"];
 $query      = mysqli_query($conn, "SELECT * FROM tb_users WHERE idUser = $iduser");
 $datauser   = mysqli_fetch_assoc($query);
 
-$id = $_GET["detail"];
-$query = mysqli_query($conn, "SELECT stok FROM tb_barang WHERE idBarang = $id");
+$id     = $_GET["detail"];
+$query  = mysqli_query($conn, "SELECT stok FROM tb_barang WHERE idBarang = $id");
 
 
 // koneksi ke header
@@ -35,12 +35,11 @@ include("view/navbar.php");
                             $barang     = $row["namaBarang"];
                             $harga      = $row["harga"];
                             $stok       = $row["stok"];
-                            $gambar     = $row["gambar"];
                             $deskripsi  = $row["deskripsi"];
                         ?>
                             <!-- tampilan gambar/foto -->
                             <div class="col-md-6">
-                                <img class="img-fluid" src="assets/img/<?= $gambar ?>" alt="">
+                                <img src="https://via.placeholder.com/170" />
                             </div>
                             <!-- tampilan detail deskripsi barang -->
                             <div class="col-md-6">

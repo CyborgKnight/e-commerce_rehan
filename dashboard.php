@@ -44,11 +44,10 @@ include("view/navbar.php");
             $hargaBarang        = $row["harga"];
             $deskripsiBarang    = $row["deskripsi"];
             $stok               = $row["stok"];
-            $gambar             = $row["gambar"];
         ?>
             <div class="col g-3">
-                <div class="card h-100 border-0 kartu" style="width: 15rem; background-color: #E2E3E5;">
-                    <img src="assets/img/<?= $gambar ?>" class="card-img-top" width="100%" height="150px">
+                <div class="card h-100 border-0 kartu" style="width: 20rem; background-color: #E2E3E5;">
+                    <img src="https://via.placeholder.com/80" />
                     <div class="card-body">
                         <h5 class="card-text"> <a href="detail.php?detail=<?= $idBarang ?>" class="text-decoration-none"> <?= $namaBarang ?> </a> </h5>
                         <p class="card-text"> <?= "Rp " . number_format($hargaBarang, 0, ',', '.'); ?> </p>
@@ -112,9 +111,6 @@ include("view/navbar.php");
                                     <option value="Tak Tersedia"> Tak Tersedia </option>
                                 </select><br>
                                 <input type="text" value="<?= $deskripsiBarang ?>" placeholder="Deskripsi" name="deskripsi" class="form-control" required><br>
-                                <img src="assets/img/<?= $gambar ?>" class="card-img-top"><br><br>
-                                <input type="file" value="<?= $gambar ?>" name="gambar" class="form-control"><br>
-                                <input type="hidden" name="gambar_lama" value="<?= $gambar; ?>">
                                 <input type="hidden" name="id_barang" value="<?= $idBarang ?>">
                         </div>
                         <div class="modal-footer">
@@ -142,7 +138,7 @@ include("view/navbar.php");
                             <input type="number" placeholder="Harga" name="harga" class="form-control" autocomplete="off" required><br>
                             <input type="hidden" value="tersedia" name="stok">
                             <input type="text" placeholder="Deskripsi Barang" name="deskripsi" class="form-control" autocomplete="off" required><br>
-                            <input type="file" name="gambar" class="form-control" required><br>
+                            <input type="hidden" name="gambar" class="form-control" required><br>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" name="btntambahbarang">Tambah</button>
