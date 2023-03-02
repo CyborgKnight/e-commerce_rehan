@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2023 at 03:08 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Mar 02, 2023 at 08:20 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,15 +34,7 @@ CREATE TABLE `tb_barang` (
   `stok` varchar(255) NOT NULL,
   `deskripsi` varchar(100) NOT NULL,
   `gambar` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tb_barang`
---
-
-INSERT INTO `tb_barang` (`idBarang`, `namaBarang`, `harga`, `stok`, `deskripsi`, `gambar`) VALUES
-(1, 'a', 123123, 'Tak Tersedia', 'afadf', '63feda297a4c7.jpg'),
-(2, 'b', 12312, 'Tersedia', 'fsdaf', '63fff6592ef74.jpg');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -59,14 +51,7 @@ CREATE TABLE `tb_transaksi` (
   `jasa_pengiriman` varchar(20) NOT NULL,
   `qty` int(11) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tb_transaksi`
---
-
-INSERT INTO `tb_transaksi` (`idTransaksi`, `idUser`, `idBarang`, `nama`, `alamat`, `jasa_pengiriman`, `qty`, `status`) VALUES
-(1, 2, 1, 'Reyfan RIfzandy', 'sdsadsdfas', 'jne', 12, 2);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -79,7 +64,7 @@ CREATE TABLE `tb_users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `statusUser` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_users`
@@ -119,13 +104,13 @@ ALTER TABLE `tb_users`
 -- AUTO_INCREMENT for table `tb_barang`
 --
 ALTER TABLE `tb_barang`
-  MODIFY `idBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idBarang` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_users`
