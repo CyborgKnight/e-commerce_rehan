@@ -21,7 +21,7 @@ include("view/navbar.php");
             <thead style="color: #508FC7;">
                 <tr>
                     <th> Nama Pembeli </th>
-                    <th> Jenis Barang </th>
+                    <th> Nama Barang </th>
                     <th> Jumlah Beli </th>
                     <th> Status </th>
                 </tr>

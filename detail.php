@@ -11,6 +11,10 @@ $iduser     = $_SESSION["idUser"];
 $query      = mysqli_query($conn, "SELECT * FROM tb_users WHERE idUser = $iduser");
 $datauser   = mysqli_fetch_assoc($query);
 
+$id = $_GET["detail"];
+$query = mysqli_query($conn, "SELECT stok FROM tb_barang WHERE idBarang = $id");
+
+
 // koneksi ke header
 include("view/header.php");
 
@@ -54,52 +58,57 @@ include("view/navbar.php");
 </div>
 
 <?php if ($super_user == false) : ?>
-    <!-- form pembelian -->
-    <div class="container">
-        <div class="row-justify-content-center">
-            <div class="col">
-                <div class="card my-3">
-                    <div class="card-header"> Form Pembelian </div>
-                    <div class="card-body">
-                        <form action="" method="post">
-                            <div class="col-md-4">
-                                <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required>
-                            </div>
-                            <br>
-                            <div class="col-md-4">
-                                <input type="text" name="alamat" class="form-control" placeholder="Alamat Lengkap" required>
-                            </div>
-                            <br>
-                            <div class="col-md-4">
-                                <input type="number" name="qty" class="form-control" placeholder="jumlah Pembelian" required>
-                            </div>
-                            <br>
-                            <div class="col-md-4">
-                                <select class="form-select" aria-label="Default select example" name="pengiriman">
-                                    <option selected> Pilih Jasa Pengiriman </option>
-                                    <option value="jne" name="pengiriman"> JNE </option>
-                                    <option value="j&t" name="pengiriman"> J&T </option>
-                                    <option value="sicepat" name="pengiriman"> SiCepat </option>
-                                </select>
-                            </div>
-                            <?php
-                            $result = mysqli_query($conn, "SELECT * FROM tb_barang WHERE idBarang = $id");
+    <?php while ($stok = mysqli_fetch_assoc($query)) :
+        if ($stok["stok"] != "Tak Tersedia") :
+    ?>
+            <!-- form pembelian -->
+            <div class="container">
+                <div class="row-justify-content-center">
+                    <div class="col">
+                        <div class="card my-3">
+                            <div class="card-header"> Form Pembelian </div>
+                            <div class="card-body">
+                                <form action="" method="post">
+                                    <div class="col-md-4">
+                                        <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-4">
+                                        <input type="text" name="alamat" class="form-control" placeholder="Alamat Lengkap" required>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-4">
+                                        <input type="number" name="qty" class="form-control" placeholder="jumlah Pembelian" required>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-4">
+                                        <select class="form-select" aria-label="Default select example" name="pengiriman">
+                                            <option selected> Pilih Jasa Pengiriman </option>
+                                            <option value="jne" name="pengiriman"> JNE </option>
+                                            <option value="j&t" name="pengiriman"> J&T </option>
+                                            <option value="sicepat" name="pengiriman"> SiCepat </option>
+                                        </select>
+                                    </div>
+                                    <?php
+                                    $result = mysqli_query($conn, "SELECT * FROM tb_barang WHERE idBarang = $id");
 
-                            $name           = $_SESSION["name"];
-                            $ambiliduser    = mysqli_query($conn, "SELECT idUser FROM tb_users WHERE username = '$name'");
-                            $data           = mysqli_fetch_assoc($ambiliduser);
-                            ?>
-                            <br>
-                            <div class="col-md-4">
-                                <input type="hidden" name="idUser" value="<?= $data["idUser"]; ?>">
-                                <button type="submit" class="btn btn-success" name="checkout"> CheckOut </button>
+                                    $name           = $_SESSION["name"];
+                                    $ambiliduser    = mysqli_query($conn, "SELECT idUser FROM tb_users WHERE username = '$name'");
+                                    $data           = mysqli_fetch_assoc($ambiliduser);
+                                    ?>
+                                    <br>
+                                    <div class="col-md-4">
+                                        <input type="hidden" name="idUser" value="<?= $data["idUser"]; ?>">
+                                        <button type="submit" class="btn btn-success" name="checkout"> CheckOut </button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        <?php endif; ?>
+    <?php endwhile; ?>
 <?php endif; ?>
 
 <br><br><br><br><br>

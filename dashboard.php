@@ -63,7 +63,11 @@ include("view/navbar.php");
                         <?php endif; ?>
 
                         <?php if ($super_user == false) : ?>
-                            <a href="detail.php?detail=<?= $idBarang ?>" class="btn btn-primary">Beli</a>
+                            <?php if ($row["stok"] == "Tersedia") : ?>
+                                <a href="detail.php?detail=<?= $idBarang ?>" class="btn btn-primary">Beli</a>
+                            <?php elseif ($row["stok"] == "Tak Tersedia") : ?>
+                                <a class="btn btn-danger"> Soldout </a>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -102,11 +106,11 @@ include("view/navbar.php");
                             <form action="" method="post" enctype="multipart/form-data">
                                 <input type="text" placeholder="Nama Barang" value="<?= $namaBarang ?>" name="barang" class="form-control" required><br>
                                 <input type="number" placeholder="Harga" value="<?= $hargaBarang ?>" name="harga" class="form-control" required><br>
-                                <select class="form-select" aria-label=".form-select-lg example" name="stok" value="<?= $stok ?>" >
+                                <select class="form-select" aria-label=".form-select-lg example" name="stok" value="<?= $stok ?>">
                                     <option selected> Pilih Stok </option>
                                     <option value="Tersedia"> Tersedia </option>
                                     <option value="Tak Tersedia"> Tak Tersedia </option>
-                                </select><br>                                
+                                </select><br>
                                 <input type="text" value="<?= $deskripsiBarang ?>" placeholder="Deskripsi" name="deskripsi" class="form-control" required><br>
                                 <img src="assets/img/<?= $gambar ?>" class="card-img-top"><br><br>
                                 <input type="file" value="<?= $gambar ?>" name="gambar" class="form-control"><br>
@@ -136,7 +140,7 @@ include("view/navbar.php");
                         <form action="" method="post" enctype="multipart/form-data">
                             <input type="text" placeholder="Nama Produk" name="barang" class="form-control" autocomplete="off" required><br>
                             <input type="number" placeholder="Harga" name="harga" class="form-control" autocomplete="off" required><br>
-                            <input type="hidden" value="tersedia" name="stok">                          
+                            <input type="hidden" value="tersedia" name="stok">
                             <input type="text" placeholder="Deskripsi Barang" name="deskripsi" class="form-control" autocomplete="off" required><br>
                             <input type="file" name="gambar" class="form-control" required><br>
                     </div>

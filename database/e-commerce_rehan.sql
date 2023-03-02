@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2023 at 07:06 AM
+-- Generation Time: Mar 02, 2023 at 03:08 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -41,7 +41,8 @@ CREATE TABLE `tb_barang` (
 --
 
 INSERT INTO `tb_barang` (`idBarang`, `namaBarang`, `harga`, `stok`, `deskripsi`, `gambar`) VALUES
-(1, 'a', 123123, 'Tak Tersedia', 'afadf', '63feda297a4c7.jpg');
+(1, 'a', 123123, 'Tak Tersedia', 'afadf', '63feda297a4c7.jpg'),
+(2, 'b', 12312, 'Tersedia', 'fsdaf', '63fff6592ef74.jpg');
 
 -- --------------------------------------------------------
 
@@ -59,6 +60,13 @@ CREATE TABLE `tb_transaksi` (
   `qty` int(11) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_transaksi`
+--
+
+INSERT INTO `tb_transaksi` (`idTransaksi`, `idUser`, `idBarang`, `nama`, `alamat`, `jasa_pengiriman`, `qty`, `status`) VALUES
+(1, 2, 1, 'Reyfan RIfzandy', 'sdsadsdfas', 'jne', 12, 2);
 
 -- --------------------------------------------------------
 
@@ -111,13 +119,13 @@ ALTER TABLE `tb_users`
 -- AUTO_INCREMENT for table `tb_barang`
 --
 ALTER TABLE `tb_barang`
-  MODIFY `idBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_users`
